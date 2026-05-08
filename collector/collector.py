@@ -69,6 +69,16 @@ def collect_pod_details(v1, namespace="default"):
         pod_name = pod.metadata.name
         status = pod.status
 
+        last_states = []
+        for cs in (status.container_statuses or []):
+            if cs.last_state and cs.last_state.terminated:
+                last_states.append({
+                    "container": cs.name,
+                    "reason": cs.last_state.terminated.reason,
+                    "exit_code": cs.last_state.terminated.exit_code,
+                    "finished_at": str(cs.last_state.terminated.finished_at)
+                })
+
         collected.append({
             "source": "pod_detail",
             "pod": pod_name,
@@ -85,6 +95,7 @@ def collect_pod_details(v1, namespace="default"):
                 cs.restart_count
                 for cs in (status.container_statuses or [])
             ),
+            "last_state": last_states,
             "timestamp": datetime.now(UTC).isoformat()
         })
         console.print(f"  ✓ Collected details for [green]{pod_name}[/green]")
@@ -129,4 +140,4 @@ def run_collection(label: str = "normal", namespace: str = "default"):
     return save_collection(data, label)
 
 if __name__ == "__main__":
-    run_collection(label="normal")
+    run_collection(label="container_kill")
