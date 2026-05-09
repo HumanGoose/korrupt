@@ -52,10 +52,10 @@ Korrupt:  Runs kubectl get pods -A
 │                                                             │
 │   User question → FastAPI agent → Claude (tool use)         │
 │                                        ↓                    │
-│                          ┌─────────────────────────┐        │
+│                          ┌──────────────────────────┐       │
 │                          │  kubectl commands (live) │       │
 │                          │  Qdrant similarity search│       │
-│                          └─────────────────────────┘        │
+│                          └──────────────────────────┘       │
 │                                        ↓                    │
 │                         Root cause + remediation steps      │
 │                                        ↓                    │
