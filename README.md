@@ -40,7 +40,7 @@ Korrupt:  Runs kubectl get pods -A
 ┌─────────────────────────────────────────────────────────────┐
 │                        Ingestion (one-time)                 │
 │                                                             │
-│   LitmusChaos → K8s cluster → Log collector → Chunker      │
+│   LitmusChaos → K8s cluster → Log collector → Chunker       │
 │                                     ↓                       │
 │                             Ollama embeddings               │
 │                                     ↓                       │
@@ -50,12 +50,12 @@ Korrupt:  Runs kubectl get pods -A
 ┌─────────────────────────────────────────────────────────────┐
 │                        Query (real-time)                    │
 │                                                             │
-│   User question → FastAPI agent → Claude (tool use)        │
+│   User question → FastAPI agent → Claude (tool use)         │
 │                                        ↓                    │
-│                          ┌─────────────────────────┐       │
+│                          ┌─────────────────────────┐        │
 │                          │  kubectl commands (live) │       │
 │                          │  Qdrant similarity search│       │
-│                          └─────────────────────────┘       │
+│                          └─────────────────────────┘        │
 │                                        ↓                    │
 │                         Root cause + remediation steps      │
 │                                        ↓                    │
